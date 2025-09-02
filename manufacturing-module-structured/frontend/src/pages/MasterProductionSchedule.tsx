@@ -39,19 +39,20 @@ const MasterProductionSchedule: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 5;
 
-  useEffect(() => {
-    const base = (import.meta.env.VITE_API_URL as string) ?? "http://localhost:5000";
-    fetch(`${base}/api/mps`)
-      .then((r) => r.json())
-      .then((d) => {
-        setData(d);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Failed to fetch MPS data:", err);
-        setLoading(false);
-      });
-  }, []);
+useEffect(() => {
+  const base = (import.meta.env.VITE_API_URL as string) ?? "http://localhost:5000";
+  fetch(`${base}/api/mps`)
+    .then((r) => r.json())
+    .then((d) => {
+      setData(d);
+      setLoading(false);
+    })
+    .catch((err) => {
+      console.error("Failed to fetch MPS data:", err);
+      setLoading(false);
+    });
+}, []);
+
 
   const totalPages = Math.max(1, Math.ceil(data.length / pageSize));
   const startIndex = (currentPage - 1) * pageSize;
@@ -72,7 +73,9 @@ const MasterProductionSchedule: React.FC = () => {
         </CardHeader>
         <CardContent>
           <div className="mb-4 flex justify-between items-center">
-            <div className="text-sm text-muted-foreground">Plan and manage production schedules and work orders</div>
+            <div className="text-sm text-muted-foreground">
+              Plan and manage production schedules and work orders
+            </div>
             <Button>
               <Plus className="w-4 h-4 mr-2" /> Add New Schedule
             </Button>
@@ -91,9 +94,13 @@ const MasterProductionSchedule: React.FC = () => {
               </TableHeader>
               <TableBody>
                 {loading ? (
-                  <TableRow><TableCell colSpan={5}>Loading...</TableCell></TableRow>
+                  <TableRow>
+                    <TableCell colSpan={5}>Loading...</TableCell>
+                  </TableRow>
                 ) : pageData.length === 0 ? (
-                  <TableRow><TableCell colSpan={5}>No records</TableCell></TableRow>
+                  <TableRow>
+                    <TableCell colSpan={5}>No records</TableCell>
+                  </TableRow>
                 ) : (
                   pageData.map((item, idx) => (
                     <TableRow key={idx}>
@@ -102,7 +109,9 @@ const MasterProductionSchedule: React.FC = () => {
                       <TableCell>{item.quantity}</TableCell>
                       <TableCell>{item.dueDate}</TableCell>
                       <TableCell>
-                        <Badge variant={getStatusVariant(item.status) as any}>{item.status}</Badge>
+                        <Badge variant={getStatusVariant(item.status) as any}>
+                          {item.status}
+                        </Badge>
                       </TableCell>
                     </TableRow>
                   ))
@@ -116,17 +125,27 @@ const MasterProductionSchedule: React.FC = () => {
               Showing {startIndex + 1}-{endIndex} of {data.length} entries
             </div>
             <div className="flex items-center space-x-2">
-              <Button onClick={() => goToPage(currentPage - 1)} disabled={currentPage === 1}>
+              <Button
+                onClick={() => goToPage(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
                 <ChevronLeft className="w-4 h-4 mr-1" /> Previous
               </Button>
               <div className="inline-flex items-center space-x-1">
                 {Array.from({ length: totalPages }).map((_, i) => (
-                  <Button key={i} onClick={() => goToPage(i + 1)} variant={currentPage === i + 1 ? "default" : "ghost"}>
+                  <Button
+                    key={i}
+                    onClick={() => goToPage(i + 1)}
+                    variant={currentPage === i + 1 ? "default" : "ghost"}
+                  >
                     {i + 1}
                   </Button>
                 ))}
               </div>
-              <Button onClick={() => goToPage(currentPage + 1)} disabled={currentPage === totalPages}>
+              <Button
+                onClick={() => goToPage(currentPage + 1)}
+                disabled={currentPage === totalPages}
+              >
                 Next <ChevronRight className="w-4 h-4 ml-1" />
               </Button>
             </div>
