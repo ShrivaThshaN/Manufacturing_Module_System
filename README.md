@@ -40,24 +40,19 @@ manufacturing-module-structured/
 │ └── vite.config.ts (or similar)
 └── README.md
 
-yaml
-Copy code
-
----
 
 ##  Setup Instructions
 
 ### Backend
 
 1. **Install dependencies**
-   ```bash
+ 
    cd backend
    npm install
+   
 Configure database connection
 Update config/db.js with your PostgreSQL credentials:
 
-js
-Copy code
 module.exports = new Pool({
   user: 'postgres',
   host: 'localhost',
@@ -65,10 +60,9 @@ module.exports = new Pool({
   password: 'yourPassword',
   port: 5432,
 });
-Start the server
 
-bash
-Copy code
+
+Start the server
 npm run start
 This will:
 
@@ -76,22 +70,19 @@ Serve API at http://localhost:5000/api/mps
 
 Update data/mpsdata.json on every fetch request
 
+------------------------------------------------------------------------------------------------------------
+
 Frontend
 Install dependencies
 
-bash
-Copy code
 cd frontend
 npm install
-Run in development mode
 
-bash
-Copy code
+
+Run in development mode
 npm run dev
 Ensure environment includes VITE_API_URL pointing to your backend, e.g.:
 
-ini
-Copy code
 VITE_API_URL=http://localhost:5000
 Access UI
 Open http://localhost:3000 (or the port your framework uses) to view the MPS table.
@@ -105,9 +96,9 @@ The results are converted to camelCase, saved into mpsdata.json, and sent as JSO
 
 Frontend renders entries in paginated, styled table via React components.
 
+
 Sample Commit Workflow
-bash
-Copy code
+
 git status
 git add controllers/mpsController.js
 git add routes/mps.js
