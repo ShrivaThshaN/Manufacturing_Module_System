@@ -18,6 +18,9 @@ This repository contains a full-stack **Manufacturing Module System** comprised 
 ---
 
 ##  Folder Structure
+---
+## Project Structure
+
 
 manufacturing-module-structured/
 ├── backend/
@@ -40,6 +43,7 @@ manufacturing-module-structured/
 │ └── vite.config.ts (or similar)
 └── README.md
 
+---
 
 ##  Setup Instructions
 
